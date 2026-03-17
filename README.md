@@ -1,36 +1,43 @@
-# Attendance Automation System with Face Recognition
+# Automated Attendance System Using Face Recognition
 
-A smart attendance management system using Face Recognition, Python, MySQL, and Flask.
+A smart attendance management system built using Face Recognition, Python, MySQL and Flask.
+
+## 👩‍💻 Developer
+- **Name:** Spoorthi V N
+- **Department:** ECE
+- **College:** PESITM, Shivamogga
 
 ## 🚀 Features
 - Face recognition based attendance marking
-- Automatic Punch IN and Punch OUT
+- Automatic Punch IN and Punch OUT using keyboard
 - Web dashboard with date filtering
 - Excel report generation
 - Auto scheduler for daily reports
 - MySQL database storage
+- Unknown face detection
 
 ## 🛠️ Technologies Used
 - **Python 3.13** — Core programming language
 - **OpenCV** — Camera and video processing
-- **DeepFace** — Face recognition AI model
+- **DeepFace** — Face recognition AI (FaceNet model)
 - **MySQL** — Database storage
 - **Flask** — Web dashboard
 - **Pandas / OpenPyXL** — Excel report generation
-
+- **Schedule** — Automatic task scheduling
+- **CMake** — Required for face recognition libraries
 
 ## 📁 Project Structure
 ```
-attendance_dashboard/
+attendence_dashboard/
 ├── main.py                  # Master control menu
-├── attendance_system.py     # Face recognition system
-├── enroll_employee.py       # Employee enrollment
+├── attendance_system.py     # Face recognition + Punch IN/OUT
+├── enroll_employee.py       # Employee face enrollment
 ├── generate_report.py       # Excel report generator
 ├── scheduler.py             # Auto daily scheduler
 ├── app.py                   # Flask web server
-├── send_alerts.py           # Email alerts
+├── README.md                # Project documentation
 └── templates/
-        └── dashboard.html   # Web dashboard
+        └── dashboard.html   # Web dashboard UI
 ```
 
 ## ⚙️ Installation
@@ -45,12 +52,12 @@ pip install deepface
 pip install tf-keras
 pip install tensorflow
 pip install mysql-connector-python
-pip install numpy pandas flask openpyxl schedule
+pip install numpy pandas flask openpyxl schedule cmake
 ```
 
 ### Step 3: Setup MySQL Database
 - Install MySQL Community Edition
-- Open MySQL Workbench
+- Install MySQL Workbench
 - Run this SQL:
 ```sql
 CREATE DATABASE attendance_db;
@@ -101,17 +108,17 @@ python main.py
 
 ## 👤 How to Enroll Employees
 1. Run `python main.py`
-2. Press **2** to enroll
-3. Enter name, department, email
-4. Look at camera
-5. Press **SPACEBAR** to capture face
+2. Press **2** to enroll new employee
+3. Camera opens — press **SPACEBAR** to capture face
+4. Enter name, department and email
+5. Face is saved to database automatically
 
 ## 📋 How to Mark Attendance
 1. Run `python main.py`
 2. Press **1** to start attendance system
 3. Look at camera — your name appears in green
-4. Press **I** to Punch IN
-5. Press **O** to Punch OUT
+4. Press **I** to Punch IN ✅
+5. Press **O** to Punch OUT ✅
 6. Press **Q** to quit
 
 ## 📊 How to View Dashboard
@@ -119,11 +126,13 @@ python main.py
 2. Press **5** to open dashboard
 3. Browser opens at http://127.0.0.1:5000
 4. Use date filter to view any day's attendance
+5. Click All Records to view complete history
 
 ## 📈 How to Generate Excel Report
 1. Run `python main.py`
 2. Press **3** to generate report
-3. Excel file saved in project folder
+3. Excel file saved in project folder as
+   `attendance_report_YYYY-MM-DD.xlsx`
 
 ## 🗄️ Database Structure
 
@@ -134,7 +143,7 @@ python main.py
 | name | VARCHAR | Employee name |
 | department | VARCHAR | Department |
 | email | VARCHAR | Email address |
-| face_embedding | LONGTEXT | Face data |
+| face_embedding | LONGTEXT | Face recognition data |
 | created_at | TIMESTAMP | Registration date |
 
 ### Attendance Table
@@ -147,32 +156,15 @@ python main.py
 | punch_out | TIME | Punch out time |
 | status | VARCHAR | Present/Absent |
 
-## 👨‍💻 Developer
-- Built with Python, MySQL, DeepFace, Flask
-- Face Recognition using FaceNet model
-- Web Dashboard using Flask + HTML/CSS
-
-## 📝 Notes
+## 📝 Important Notes
 - Make sure camera is connected before running
 - First run downloads AI models (takes 2-3 minutes)
 - Punch OUT only available after 4 hours of Punch IN
 - Dashboard auto refreshes every 10 seconds
-```
+- Unknown faces are shown in red on camera
 
-Save with **Ctrl+S**!
-
----
-
-Your project folder should now look like this:
-```
-attendence_dashboard/
-├── main.py
-├── attendance_system.py
-├── enroll_employee.py
-├── generate_report.py
-├── scheduler.py
-├── app.py
-├── send_alerts.py
-├── README.md          ← new!
-└── templates/
-        └── dashboard.html
+## 🎯 Future Enhancements
+- Email alerts for absent employees
+- UiPath RPA automation for HR reporting
+- Mobile app integration
+- Multiple camera support
